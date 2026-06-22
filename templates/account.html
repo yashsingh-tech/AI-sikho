@@ -1,0 +1,27 @@
+<!-- templates/account.html -->
+{% extends "base.html" %}
+{% block title %}My Account - AI Sikho{% endblock %}
+
+{% block content %}
+<div class="profile-card">
+    <a href="{{ url_for('dashboard') }}" class="back-link">← Back to dashboard</a>
+
+    <h1>My Account</h1>
+    <p class="subtitle">{{ current_user.name }} · {{ current_user.email }}</p>
+
+    <form method="POST" action="{{ url_for('account') }}">
+        <label>Your learning path</label>
+        <div class="stream-grid">
+            {% for stream in streams %}
+                <label class="stream-option">
+                    <input type="radio" name="stream" value="{{ stream.id }}"
+                        {% if current_user.stream == stream.id %}checked{% endif %} required>
+                    <span>{{ stream.name }}</span>
+                </label>
+            {% endfor %}
+        </div>
+
+        <button type="submit">Save changes</button>
+    </form>
+</div>
+{% endblock %}

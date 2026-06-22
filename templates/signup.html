@@ -1,0 +1,27 @@
+<!-- templates/signup.html -->
+{% extends "base.html" %}
+{% block title %}Sign Up - AI Sikho{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+    <h1>Create your account</h1>
+    <p class="subtitle">Start learning AI in 2 minutes</p>
+
+    <form method="POST" action="{{ url_for('signup') }}">
+        <label>Your name</label>
+        <input type="text" name="name" placeholder="e.g. Riya Sharma" required>
+
+        <label>Email</label>
+        <input type="email" name="email" placeholder="you@example.com" required>
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="••••••••" required>
+
+        <button type="submit">Create account</button>
+    </form>
+
+    <p class="switch-link">
+        Already have an account? <a href="{{ url_for('login') }}">Log in</a>
+    </p>
+</div>
+{% endblock %}

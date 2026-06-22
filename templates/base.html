@@ -1,0 +1,40 @@
+<!-- templates/base.html -->
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AI Sikho{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header class="topbar">
+        <a href="{{ url_for('home') }}" class="brand">⚡ AI Sikho</a>
+        {% if current_user.is_authenticated %}
+            <div class="topbar-right">
+                <a href="{{ url_for('account') }}" class="user-pill-link">{{ current_user.name }}</a>
+                <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+            </div>
+        {% endif %}
+    </header>
+
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>

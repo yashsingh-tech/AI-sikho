@@ -1,0 +1,23 @@
+<!-- templates/profile.html -->
+{% extends "base.html" %}
+{% block title %}Tell us about you - AI Sikho{% endblock %}
+
+{% block content %}
+<div class="profile-card">
+    <h1>Tell us about yourself</h1>
+    <p class="subtitle">This decides which courses show up on your home page.</p>
+
+    <form method="POST" action="{{ url_for('profile') }}">
+        <div class="stream-grid">
+            {% for stream in streams %}
+                <label class="stream-option">
+                    <input type="radio" name="stream" value="{{ stream.id }}" required>
+                    <span>{{ stream.name }}</span>
+                </label>
+            {% endfor %}
+        </div>
+
+        <button type="submit">Continue</button>
+    </form>
+</div>
+{% endblock %}

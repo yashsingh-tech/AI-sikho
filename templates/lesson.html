@@ -1,0 +1,35 @@
+<!-- templates/lesson.html -->
+{% extends "base.html" %}
+{% block title %}{{ lesson.title }} - AI Sikho{% endblock %}
+
+{% block content %}
+<div class="lesson-page">
+    <a href="{{ url_for('dashboard') }}" class="back-link">← Back to dashboard</a>
+
+    <div class="lesson-header">
+        <span class="updated-tag">Updated {{ lesson.updated }}</span>
+        <h1>{{ lesson.title }}</h1>
+        <p class="subtitle">{{ lesson.intro }}</p>
+        <p class="time-tag">⏱ {{ lesson.time }}</p>
+    </div>
+
+    {% for step in lesson.steps %}
+        <div class="step">
+            <div class="step-number">{{ loop.index }}</div>
+            <div class="step-body">
+                <h4>{{ step.title }}</h4>
+                <p>{{ step.text }}</p>
+                {% if step.prompt %}
+                    <pre class="prompt-box">{{ step.prompt }}</pre>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+
+    {% if lesson.tip %}
+        <div class="tip-box">
+            💡 {{ lesson.tip }}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

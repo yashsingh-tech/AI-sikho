@@ -1,0 +1,38 @@
+<!-- templates/dashboard.html -->
+{% extends "base.html" %}
+{% block title %}Dashboard - AI Sikho{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="dashboard-header">
+        <div>
+            <h2>Hi {{ current_user.name }} 👋</h2>
+            <p class="subtitle">Your learning path: {{ stream_data.display_name }}</p>
+        </div>
+    </div>
+
+    <div class="box-grid">
+        {% for box in stream_data.boxes %}
+            <div class="box-card">
+                <div class="box-icon">{{ box.icon }}</div>
+                <h3>{{ box.title }}</h3>
+                <p>{{ box.description }}</p>
+
+                {% if box.lessons %}
+                    <ul class="lesson-list">
+                        {% for lesson in box.lessons %}
+                            <li>
+                                <a href="{{ url_for('lesson', box_id=box.id, lesson_id=lesson.id) }}">
+                                    {{ loop.index }}. {{ lesson.title }} <span class="time-tag">({{ lesson.time }})</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="coming-soon">New lessons coming soon</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
