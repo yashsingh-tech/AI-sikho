@@ -1,2 +1,5 @@
 Flask-SQLAlchemy
 Flask-Login
+python-dotenv
+Flask-Limiter
+gunicorn
